@@ -1,4 +1,4 @@
-#include<iostream> 																			        		//Preprocessor Directive of Header Files
+#include<iostream> 		//Preprocessor Directive of Header Files
 #include<string.h>
 #include<iomanip>
 #include<cctype>
@@ -10,28 +10,33 @@ void End(); //function declaration for parameter pass by reference
 int Selecttime(int);
 
 int main() {
-
     char selection, response, ans, opt, action;
     int y = 1, choice, movieType, time, food[10], drinks[10], ticket, adult, kids, phoneN, foodIndex, drinkIndex;
     float tpp, Pdiscount, priceA, priceB, after, Fprice[10], Dprice[10], Tfoodprice = 0, payment;
     string name, email;
     bool validation = true;
-    
-	// Initialize arrays with zero value
-	for(int i = 0; i < 10; i++) { Fprice[i] = 0; }
-	for(int i = 0; i < 10; i++) { Dprice[i] = 0; }
+
+    // Initialize arrays with zero value
+    for (int i = 0; i < 10; i++) {
+        Fprice[i] = 0;
+    }
+    for (int i = 0; i < 10; i++) {
+        Dprice[i] = 0;
+    }
 
     Greeting(name, email, phoneN);
 
     cout << "\n\t\t\t ----------------------------------";
     cout << "\n\t\t\t\t MOVIE TICKET SYSTEM";
     cout << "\n\t\t\t ----------------------------------";
+
     do //counter controlled loop
     {
         cout << "\n\tHello," << name << endl; //loop statement       
         y += 2; //updating
     }
     while (y <= 8); //evaluation
+
     cout << "\n\n\t\t\t\t <1> Movie Timings";
     cout << "\n\t\t\t\t <2> Food and Beverages";
 
@@ -103,7 +108,6 @@ int main() {
         if (ans == 'Y' || ans == 'y') {
             Pdiscount = tpp * 0.1;
             after = tpp - Pdiscount;
-
         } else {
             Pdiscount = 0;
             after = tpp - Pdiscount;
@@ -111,77 +115,91 @@ int main() {
 
         cout << fixed << setprecision(2);
         cout << "\n\tYour Ticket Price will be RM" << after;
-        
+
         foodIndex = 0;
-        
-        while (foodIndex < 10)
-        {
-        	cout << "\n\tDo you want to add food? (Y or N): ";
-	        cin >> selection;
-	
-	        if (selection == 'Y' || selection == 'y') {
-		        cout << "\n\t\t\t\t\t   FOOD   \t" << "\tCODE\t" << endl;
-		        cout << "\t\t\t\t\t ***************************";
-		        cout << "\n\t\t\t\t\tPopcorn \t" << "\t  1\t";
-		        cout << "\n\t\t\t\t\tBig Dipper\t" << "\t  2\t";
-		        cout << "\n\t\t\t\t\tHorn Chip\t" << "\t  3\t";
-		        cout << "\n\t\t\t\t\tHot Minnies\t" << "\t  4\t";
-		        cout << "\n\t\t\t\t\tChicke Samosa\t" << "\t  5\t";
-		        cout << "\n\t\t\t\t\tPopcorn Chicken\t" << "\t  6\t";
-		        cout << "\n\tPlease enter your food by code:";
-		        cin >> food[foodIndex];
-		
-		        cout << "\n\tMedium or Large (M or L)?: ";
-		        cin >> response;
-		
-		        if (response == 'M' || response == 'm') {
-		            Fprice[foodIndex] = 10;
-		            cout << "\n\tPrice for medium is RM " << Fprice[foodIndex] << endl;
-		        } else if (response == 'L' || response == 'l') {
-		            Fprice[foodIndex] = 15;
-		            cout << "\n\tPrice for large is RM " << Fprice[foodIndex] << endl;
-		        } else
-		            cout << "INVALID";
-		    } else {
+
+        while (foodIndex < 10) {
+            cout << "\n\tDo you want to add food? (Y or N): ";
+            cin >> selection;
+
+            if (selection == 'Y' || selection == 'y') {
+                cout << "\n\t\t\t\t\t   FOOD   \t" << "\tCODE\t" << endl;
+                cout << "\t\t\t\t\t ***************************";
+                cout << "\n\t\t\t\t\tPopcorn \t" << "\t  1\t";
+                cout << "\n\t\t\t\t\tBig Dipper\t" << "\t  2\t";
+                cout << "\n\t\t\t\t\tHorn Chip\t" << "\t  3\t";
+                cout << "\n\t\t\t\t\tHot Minnies\t" << "\t  4\t";
+                cout << "\n\t\t\t\t\tChicke Samosa\t" << "\t  5\t";
+                cout << "\n\t\t\t\t\tPopcorn Chicken\t" << "\t  6\t";
+
+                do {
+                    cout << "\n\tPlease enter your food by code : ";
+                    cin >> food[foodIndex];
+                    if (food[foodIndex] < 1 || food[foodIndex] > 6) {
+                        validation = false;
+                        cout << "\n\t\t\t [Invalid selection] Please input 1 to 6 only.\n";
+                    } else {
+                        validation = true;
+                    }
+                } while (!validation);
+
+                cout << "\n\tMedium or Large (M or L)?: ";
+                cin >> response;
+
+                if (response == 'M' || response == 'm') {
+                    Fprice[foodIndex] = 10;
+                    cout << "\n\tPrice for medium is RM " << Fprice[foodIndex] << endl;
+                } else if (response == 'L' || response == 'l') {
+                    Fprice[foodIndex] = 15;
+                    cout << "\n\tPrice for large is RM " << Fprice[foodIndex] << endl;
+                } else
+                    cout << "INVALID";
+            } else {
                 foodIndex = 99; // Exit the while loop prematurely
             }
-	            
-	        foodIndex++;
-	    }
-	    
-	    drinkIndex = 0;
-        
-        while (drinkIndex < 10)
-        {
-	        cout << "\n\tDo you want to add drinks? (Y or N): ";
-	        cin >> selection;
-	
-	        if (selection == 'Y' || selection == 'y') {
-	            cout << "\n\t\t\t\t\t   DRINKS   \t" << "\t	CODE\t" << endl;
-	            cout << "\t\t\t\t\t ************************************";
-	            cout << "\n\t\t\t\t\tHot Drinks \t" << "\t  	1\t";
-	            cout << "\n\t\t\t\t\tCarbonated Drinks\t" << "\t2\t";
-	            cout << "\n\t\t\t\t\tFrappucino\t" << "\t 	3\t";
-	            cout << "\n\t\t\t\t\tJuice\t" << "\t 		4\t";
-	            cout << "\n\t\t\t\t\tTea\t" << "\t		5\t";
-	
-	            cout << "\n\tPlease enter your drinks by code: ";
-	            cin >> drinks[foodIndex];
-	
-	            Dprice[drinkIndex] = 8;
-	            cout << "\n\tPrice for drink is RM " << Dprice[drinkIndex] << endl;
-	
-	        } else {
-				drinkIndex = 99;	// Exit the while loop prematurely
-	        }
-	        
-	        drinkIndex++;
-	    }
-	    
-	    for(int i = 0; i < 10; i++)
-	    {
-	    	Tfoodprice += Fprice[i] + Dprice[i];
-		}
+
+            foodIndex++;
+        }
+
+        drinkIndex = 0;
+
+        while (drinkIndex < 10) {
+            cout << "\n\tDo you want to add drinks? (Y or N): ";
+            cin >> selection;
+
+            if (selection == 'Y' || selection == 'y') {
+                cout << "\n\t\t\t\t\t   DRINKS   \t" << "\t	CODE\t" << endl;
+                cout << "\t\t\t\t\t ************************************";
+                cout << "\n\t\t\t\t\tHot Drinks \t" << "\t  	1\t";
+                cout << "\n\t\t\t\t\tCarbonated Drinks\t" << "\t2\t";
+                cout << "\n\t\t\t\t\tFrappucino\t" << "\t 	3\t";
+                cout << "\n\t\t\t\t\tJuice\t" << "\t 		4\t";
+                cout << "\n\t\t\t\t\tTea\t" << "\t		5\t";
+
+                do {
+                    cout << "\n\tPlease enter your drinks by code : ";
+                    cin >> drinks[drinkIndex];
+                    if (drinks[drinkIndex] < 1 || drinks[drinkIndex] > 5) {
+                        validation = false;
+                        cout << "\n\t\t\t [Invalid selection] Please input 1 to 5 only.\n";
+                    } else {
+                        validation = true;
+                    }
+                } while (!validation);
+
+                Dprice[drinkIndex] = 8;
+                cout << "\n\tPrice for drink is RM " << Dprice[drinkIndex] << endl;
+
+            } else {
+                drinkIndex = 99; // Exit the while loop prematurely
+            }
+
+            drinkIndex++;
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Tfoodprice += Fprice[i] + Dprice[i];
+        }
 
         cout << "\n\tThe total price of your tickets is RM " << tpp << endl;
         cout << "\n\tThe total price of your food and beverage is RM " << Tfoodprice << endl;
@@ -193,91 +211,105 @@ int main() {
 
     case 2:
         system("CLS");
-        
+
         foodIndex = 0;
-        
-        while (foodIndex < 10)
-        {
-        	cout << "\n\tDo you want to add food? (Y or N): ";
-	        cin >> selection;
-	
-	        if (selection == 'Y' || selection == 'y') {
-		        cout << "\n\t\t\t\t\t   FOOD   \t" << "\tCODE\t" << endl;
-		        cout << "\t\t\t\t\t ***************************";
-		        cout << "\n\t\t\t\t\tPopcorn \t" << "\t  1\t";
-		        cout << "\n\t\t\t\t\tBig Dipper\t" << "\t  2\t";
-		        cout << "\n\t\t\t\t\tHorn Chip\t" << "\t  3\t";
-		        cout << "\n\t\t\t\t\tHot Minnies\t" << "\t  4\t";
-		        cout << "\n\t\t\t\t\tChicke Samosa\t" << "\t  5\t";
-		        cout << "\n\t\t\t\t\tPopcorn Chicken\t" << "\t  6\t";
-		        cout << "\n\tPlease enter your food by code:";
-		        cin >> food[foodIndex];
-		
-		        cout << "\n\tMedium or Large (M or L)?: ";
-		        cin >> response;
-		
-		        if (response == 'M' || response == 'm') {
-		            Fprice[foodIndex] = 10;
-		            cout << "\n\tPrice for medium is RM " << Fprice[foodIndex] << endl;
-		        } else if (response == 'L' || response == 'l') {
-		            Fprice[foodIndex] = 15;
-		            cout << "\n\tPrice for large is RM " << Fprice[foodIndex] << endl;
-		        } else
-		            cout << "INVALID";
-		    } else {
+
+        while (foodIndex < 10) {
+            cout << "\n\tDo you want to add food? (Y or N): ";
+            cin >> selection;
+
+            if (selection == 'Y' || selection == 'y') {
+                cout << "\n\t\t\t\t\t   FOOD   \t" << "\tCODE\t" << endl;
+                cout << "\t\t\t\t\t ***************************";
+                cout << "\n\t\t\t\t\tPopcorn \t" << "\t  1\t";
+                cout << "\n\t\t\t\t\tBig Dipper\t" << "\t  2\t";
+                cout << "\n\t\t\t\t\tHorn Chip\t" << "\t  3\t";
+                cout << "\n\t\t\t\t\tHot Minnies\t" << "\t  4\t";
+                cout << "\n\t\t\t\t\tChicke Samosa\t" << "\t  5\t";
+                cout << "\n\t\t\t\t\tPopcorn Chicken\t" << "\t  6\t";
+
+                do {
+                    cout << "\n\tPlease enter your food by code : ";
+                    cin >> food[foodIndex];
+                    if (food[foodIndex] < 1 || food[foodIndex] > 6) {
+                        validation = false;
+                        cout << "\n\t\t\t [Invalid selection] Please input 1 to 6 only.\n";
+                    } else {
+                        validation = true;
+                    }
+                } while (!validation);
+
+                cout << "\n\tMedium or Large (M or L)?: ";
+                cin >> response;
+
+                if (response == 'M' || response == 'm') {
+                    Fprice[foodIndex] = 10;
+                    cout << "\n\tPrice for medium is RM " << Fprice[foodIndex] << endl;
+                } else if (response == 'L' || response == 'l') {
+                    Fprice[foodIndex] = 15;
+                    cout << "\n\tPrice for large is RM " << Fprice[foodIndex] << endl;
+                } else
+                    cout << "INVALID";
+            } else {
                 foodIndex = 99; // Exit the while loop prematurely
             }
-	            
-	        foodIndex++;
-	    }
-	    
-	    drinkIndex = 0;
-        
-        while (drinkIndex < 10)
-        {
-	        cout << "\n\tDo you want to add drinks? (Y or N): ";
-	        cin >> selection;
-	
-	        if (selection == 'Y' || selection == 'y') {
-	            cout << "\n\t\t\t\t\t   DRINKS   \t" << "\t	CODE\t" << endl;
-	            cout << "\t\t\t\t\t ************************************";
-	            cout << "\n\t\t\t\t\tHot Drinks \t" << "\t  	1\t";
-	            cout << "\n\t\t\t\t\tCarbonated Drinks\t" << "\t2\t";
-	            cout << "\n\t\t\t\t\tFrappucino\t" << "\t 	3\t";
-	            cout << "\n\t\t\t\t\tJuice\t" << "\t 		4\t";
-	            cout << "\n\t\t\t\t\tTea\t" << "\t		5\t";
-	
-	            cout << "\n\tPlease enter your drinks by code: ";
-	            cin >> drinks[foodIndex];
-	
-	            Dprice[drinkIndex] = 8;
-	            cout << "\n\tPrice for drink is RM " << Dprice[drinkIndex] << endl;
-	
-	        } else {
-				drinkIndex = 99;	// Exit the while loop prematurely
-	        }
-	        
-	        drinkIndex++;
-	    }
-	    
-	    cout << "THANK YOU !!" << endl;
-	    
-	    for(int i = 0; i < 10; i++)
-	    {
-	    	Tfoodprice += Fprice[i] + Dprice[i];
-		}
-	    
+
+            foodIndex++;
+        }
+
+        drinkIndex = 0;
+
+        while (drinkIndex < 10) {
+            cout << "\n\tDo you want to add drinks? (Y or N): ";
+            cin >> selection;
+
+            if (selection == 'Y' || selection == 'y') {
+                cout << "\n\t\t\t\t\t   DRINKS   \t" << "\t	CODE\t" << endl;
+                cout << "\t\t\t\t\t ************************************";
+                cout << "\n\t\t\t\t\tHot Drinks \t" << "\t  	1\t";
+                cout << "\n\t\t\t\t\tCarbonated Drinks\t" << "\t2\t";
+                cout << "\n\t\t\t\t\tFrappucino\t" << "\t 	3\t";
+                cout << "\n\t\t\t\t\tJuice\t" << "\t 		4\t";
+                cout << "\n\t\t\t\t\tTea\t" << "\t		5\t";
+
+                do {
+                    cout << "\n\tPlease enter your drinks by code : ";
+                    cin >> drinks[drinkIndex];
+                    if (drinks[drinkIndex] < 1 || drinks[drinkIndex] > 5) {
+                        validation = false;
+                        cout << "\n\t\t\t [Invalid selection] Please input 1 to 5 only.\n";
+                    } else {
+                        validation = true;
+                    }
+                } while (!validation);
+
+                Dprice[drinkIndex] = 8;
+                cout << "\n\tPrice for drink is RM " << Dprice[drinkIndex] << endl;
+
+            } else {
+                drinkIndex = 99; // Exit the while loop prematurely
+            }
+
+            drinkIndex++;
+        }
+
+        cout << "THANK YOU !!" << endl;
+
+        for (int i = 0; i < 10; i++) {
+            Tfoodprice += Fprice[i] + Dprice[i];
+        }
+
         cout << "\n\tThe total price of your food and beverage is RM " << Tfoodprice << endl;
         End();
-	    
+
         break;
 
     default:
         cout << "\n\n\n\t\t\t\t\tINVALID CODE." << endl;
         break;
     }
-    return 0;
 
+    return 0;
 }
 
 void Greeting(string & name, string email, int phoneN) {
@@ -293,8 +325,7 @@ void Greeting(string & name, string email, int phoneN) {
         cout << "\n\tTo login this service, please enter your name: ";
         getline(cin, name);
 
-        for (int i = 0; i < name.length(); i++) // aniq1 idham
-        {
+        for (int i = 0; i < name.length(); i++) {
             if (!(isalpha(name[i]) || isblank(name[i]))) {
                 validation = false;
             }
@@ -308,18 +339,8 @@ void Greeting(string & name, string email, int phoneN) {
     cout << "\n\tEnter your email: ";
     cin >> email;
 
-    //	do
-    //	{																									
     cout << "\n\tEnter your phone number: ";
     cin >> phoneN;
-
-    //		if (!isdigit(phoneN)){
-    //			validation = false;
-    //			cout << "\n\t\t\t [Invalid input] Please numeric only.\n";
-    //		} else {
-    //			validation = true;
-    //		}
-    //	}while (!validation);
 }
 
 void End() {
@@ -342,13 +363,12 @@ int Selecttime(int time) {
 
         cout << "\n\tPlease enter your time by code: ";
         cin >> time;
+
         if (time < 1 || time > 4) {
             validation = false;
             cout << "\n\t\t\t [Invalid selection] Please input 1 to 4 only.\n";
         } else {
             validation = true;
         }
-
     } while (!validation);
-
 }
