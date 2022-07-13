@@ -5,15 +5,15 @@
 
 using namespace std;
 
-void Greeting(string & , string, int);
+void Greeting(string & , string, string);
 void End(); //function declaration for parameter pass by reference
 int Selecttime(int);
 
 int main() {
     char selection, response, ans, opt, action;
-    int y = 1, choice, movieType, time, food[10], drinks[10], ticket, adult, kids, phoneN, foodIndex, drinkIndex;
+    int y = 1, choice, movieType, time, food[10], drinks[10], ticket, adult, kids, foodIndex, drinkIndex;
     float tpp, Pdiscount, priceA, priceB, after, Fprice[10], Dprice[10], Tfoodprice = 0, payment;
-    string name, email;
+    string name, email, phoneN;
     bool validation = true;
 
     // Initialize arrays with zero value
@@ -37,7 +37,7 @@ int main() {
     }
     while (y <= 8); //evaluation
 
-    cout << "\n\n\t\t\t\t <1> Movie Timings";
+    cout << "\n\n\t\t\t\t <1> Movies";
     cout << "\n\t\t\t\t <2> Food and Beverages";
 
     cout << "\n\tWelcome to our online movie booking system.";
@@ -201,7 +201,7 @@ int main() {
             Tfoodprice += Fprice[i] + Dprice[i];
         }
 
-        cout << "\n\tThe total price of your tickets is RM " << tpp << endl;
+        cout << "\n\tThe total price of your tickets is RM " << after << endl;
         cout << "\n\tThe total price of your food and beverage is RM " << Tfoodprice << endl;
 
         payment = after + Tfoodprice;
@@ -312,7 +312,7 @@ int main() {
     return 0;
 }
 
-void Greeting(string & name, string email, int phoneN) {
+void Greeting(string & name, string email, string phoneN) {
     cout << "\n\t\t\t ----------------------------------";
     cout << "\n\t\t\t\t MOVIE TICKET SYSTEM";
     cout << "\n\t\t\t ----------------------------------";
